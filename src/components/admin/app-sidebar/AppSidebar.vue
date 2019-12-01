@@ -1,7 +1,6 @@
 <template>
   <va-sidebar :minimized="minimized">
     <template slot="menu">
-
       <template v-for="(item, key) in items">
         <va-sidebar-link-group
           :key="key"
@@ -24,7 +23,7 @@
           :minimized="minimized"
           :activeByDefault="item.name === $route.name"
           :icon="[ 'sidebar-menu-item-icon vuestic-iconset', item.meta.iconClass ]"
-          :to="{ name: item.name }">
+          :to="{ name: item.meta.linkTo }">
           <span slot="title">{{ $t(item.displayName) }}</span>
         </va-sidebar-link>
       </template>

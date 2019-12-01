@@ -70,6 +70,15 @@ export default {
       return !this.emailErrors.length && !this.passwordErrors.length
     },
   },
+  created() {
+    callApi(`/profile`, {}, "get")
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err)
+        });
+  },
   methods: {
     onsubmit () {
       this.emailErrors = this.email ? [] : ['Email is required']

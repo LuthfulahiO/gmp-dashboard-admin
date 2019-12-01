@@ -2,14 +2,16 @@
   <div class="form-elements">
     <div class="row">
       <div class="flex xs12">
-        <va-card title="Update Profile">
+        <h1 class="headerOne">Update Profile</h1>
+        <!-- <va-card title="Update Profile"> -->
           <form @submit.prevent="updateProfile">
+            <va-card title="Bio Data">
             <div class="row">
               <div class="flex md4 sm6 xs12">
-                <va-input
+                <va-select
                   label="Grade"
                   v-model="profile.grade"
-                  placeholder="Graduate"
+                  :options="gradeList"
                 />
               </div>
               <div class="flex md4 sm6 xs12">
@@ -105,13 +107,10 @@
                   placeholder="Sub Sector"
                 />
               </div>
-              <div class="flex md4 sm6 xs12">
-                <va-input
-                  label="Occupationn"
-                  v-model="profile.occupation"
-                  placeholder="Plumber"
-                />
-              </div>
+            </div>
+            </va-card>
+            <va-card title="Education">
+            <div class="row">
               <div class="flex md4 sm6 xs12">
                 <va-input
                   label="Institute"
@@ -138,6 +137,17 @@
                   label="Year Of Graduation"
                   v-model="profile.year_of_graduation"
                   placeholder="2002"
+                />
+              </div>
+            </div>
+            </va-card>
+            <va-card title="Experience">
+            <div class="row">
+              <div class="flex md4 sm6 xs12">
+                <va-input
+                  label="Occupationn"
+                  v-model="profile.occupation"
+                  placeholder="Plumber"
                 />
               </div>
               <div class="flex md4 sm6 xs12">
@@ -197,8 +207,9 @@
                 />
               </div>
             </div>
+            </va-card>
           </form>
-        </va-card>
+        <!-- </va-card> -->
       </div>
     </div>
   </div>
@@ -206,7 +217,7 @@
 
 <script>
 import CountriesList from '../../data/CountriesList'
-import {callApi, LocalStore} from '@/app/utils'
+import {callApi} from '@/app/utils'
 import {FingerprintSpinner} from 'epic-spinners'
 export default {
   name: 'profile',
@@ -215,37 +226,38 @@ export default {
     return {
         isSubmit: false,
         profile: {
-            "grade": "Graduate",
-            "title": "Mr",
-            "marital_status": "Married",
-            "dob": "04/04/1999",
-            "gender": "Male",
-            "phone_number": "07015120757",
-            "address": "Addo, Ajah",
-            "city": "Lagos",
-            "state": "Lagos",
-            "country": "Nigeria",
-            "postal_address": "Addo",
-            "chapter": "Lagos",
+            "grade": "",
+            "title": "",
+            "marital_status": "",
+            "dob": "",
+            "gender": "",
+            "phone_number": "",
+            "address": "",
+            "city": "",
+            "state": "",
+            "country": "",
+            "postal_address": "",
+            "chapter": "",
             "sector": "",
             "sub_sector": "",
-            "occupation": "Yahoo yahoo",
+            "occupation": "",
             "institute": "",
-            "qualification": "SSce",
-            "field_of_study": "Yoruba Tech",
-            "year_of_graduation": "2002",
-            "position_rank": "senior",
-            "company": "Menaget",
-            "location": "Bahrain",
-            "work_role": "Senior Yahoo Yahoo",
-            "start_date": "04/04/1999",
-            "end_date": "04/04/2024",
-            "description": "Mad ooo"
+            "qualification": "",
+            "field_of_study": "",
+            "year_of_graduation": "",
+            "position_rank": "",
+            "company": "",
+            "location": "",
+            "work_role": "",
+            "start_date": "",
+            "end_date": "",
+            "description": ""
         },
         countriesList: CountriesList,
         genderList: ["Male", "Female", "Binary"],
         maritalList: ["Single", "Married", "Divorder"],
-        titleList:["Mr", "Mrs", "Miss"]
+        titleList:["Mr", "Mrs", "Miss"],
+        gradeList:["Graduate", "Associate", "Fellow"]
     }
   },
   methods: {
@@ -263,9 +275,13 @@ export default {
     }
   },
   created () {
-    this.$nextTick(() => {
-      this.$validator.validateAll()
-    })
+    callApi(`/profile`, {}, "get")
+        .then(res => {
+          this.profile = res.data;
+        })
+        .catch(err => {
+          console.log(err)
+        });
   },
 }
 </script>
@@ -273,5 +289,8 @@ export default {
 <style>
   .row.row-inside {
     max-width: none;
+  }
+  .headerOne {
+    margin: 0px 0px 20px 10px;
   }
 </style>

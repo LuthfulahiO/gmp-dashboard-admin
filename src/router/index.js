@@ -90,6 +90,16 @@ export default new Router({
           path:'profile',
           component: () => import('../components/profile/Profile.vue'),
           default:true
+        },
+        {
+          name:'joblist',
+          path:'joblist',
+          component: () => import('../components/jobs/joblist.vue'),
+        },
+        {
+          name:'apply',
+          path:'apply/:uuid',
+          component: () => import('../components/jobs/apply.vue'),
         }
       ]
     },

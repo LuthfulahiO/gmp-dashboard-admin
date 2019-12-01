@@ -3,7 +3,7 @@ import axios from "axios";
 export const isProd = process.env.NODE_ENV === "production";
 
 const request = axios.create({
-  baseURL:  "http://104.248.169.10/api/v1"
+  baseURL:  "http://portal.gmp.dervac.com/api/v1"
 });
 
 export const callApi = (url, data = {}, methodName = "get") => {

@@ -3,6 +3,7 @@
     <header-selector slot="selector" :minimized.sync="minimizedProxy"/>
     <template slot="logo">
       <!-- <va-icon-vuestic/> -->
+      <h1 class="headerHere">GMP</h1>
     </template>
     <template slot="center">
       <div class="row flex-nowrap align--center justify--space-between">
@@ -97,6 +98,9 @@ export default {
 }
 </script>
 <style lang="scss">
+.headerHere {
+  color: white;
+}
 .app-navbar {
   &__button {
     width: 10.8125rem;
