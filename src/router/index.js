@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AuthLayout from '../components/auth/AuthLayout'
 import AppLayout from '../components/admin/AppLayout'
-import {LocalStore} from '../app/utils'
+import { LocalStore } from '../app/utils'
 Vue.use(Router)
 
 const EmptyParentComponent = {
@@ -10,9 +10,9 @@ const EmptyParentComponent = {
 }
 
 const AuthGuard = (to, from, next) => {
-  if(LocalStore.getToken()) {
+  if (LocalStore.getToken()) {
     next()
-  }else {
+  } else {
     next('/login')
   }
 }
@@ -86,22 +86,27 @@ export default new Router({
       beforeEnter: AuthGuard,
       children: [
         {
-          name:'profile',
-          path:'profile',
+          name: 'profile',
+          path: 'profile',
           component: () => import('../components/profile/Profile.vue'),
-          default:true
+          default: true,
         },
         {
-          name:'joblist',
-          path:'joblist',
+          name: 'joblist',
+          path: 'joblist',
           component: () => import('../components/jobs/joblist.vue'),
         },
         {
-          name:'apply',
-          path:'apply/:uuid',
+          name: 'apply',
+          path: 'apply/:uuid',
           component: () => import('../components/jobs/apply.vue'),
-        }
-      ]
+        },
+        {
+          name: 'mentor',
+          path: 'mentor',
+          component: () => import('../components/mentors/mentor.vue'),
+        },
+      ],
     },
     {
       name: 'Admin',

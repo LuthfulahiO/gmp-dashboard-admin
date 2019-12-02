@@ -8,7 +8,7 @@ export const navigationRoutes = {
       name: 'dashboard',
       displayName: 'menu.dashboard',
       meta: {
-        linkTo:'dashboard',
+        linkTo: 'dashboard',
         iconClass: 'vuestic-iconset-dashboard',
       },
     },
@@ -18,7 +18,15 @@ export const navigationRoutes = {
       meta: {
         linkTo: 'joblist',
         iconClass: 'vuestic-iconset-files',
-      }
+      },
+    },
+    {
+      name: 'mentor',
+      displayName: 'Mentor',
+      meta: {
+        linkTo: 'mentor',
+        iconClass: 'vuestic-iconset-user',
+      },
     },
     // {
     //   name: 'forms',

@@ -4,6 +4,20 @@
       <div class="flex xs12">
         <h1 class="headerOne">Update Profile</h1>
         <!-- <va-card title="Update Profile"> -->
+          <div class="flex xs12">
+            <va-card title="Upload Profile Photo">
+              <va-file-upload
+                type="gallery"
+                file-types=".png, .jpg, .jpeg"
+                v-model="gallery"
+              />
+              <va-inner-loading class="flex-center py-3" :loading="isLoading">
+                <va-button @click="savePhoto()">
+                  Save
+                </va-button>
+              </va-inner-loading>
+            </va-card>
+          </div>
           <form @submit.prevent="updateProfile">
             <va-card title="Bio Data">
             <div class="row">
@@ -217,71 +231,87 @@
 
 <script>
 import CountriesList from '../../data/CountriesList'
-import {callApi} from '@/app/utils'
-import {FingerprintSpinner} from 'epic-spinners'
+import { callApi } from '@/app/utils'
+import { FingerprintSpinner } from 'epic-spinners'
 export default {
   name: 'profile',
-  components: {FingerprintSpinner},
+  components: { FingerprintSpinner },
   data () {
     return {
-        isSubmit: false,
-        profile: {
-            "grade": "",
-            "title": "",
-            "marital_status": "",
-            "dob": "",
-            "gender": "",
-            "phone_number": "",
-            "address": "",
-            "city": "",
-            "state": "",
-            "country": "",
-            "postal_address": "",
-            "chapter": "",
-            "sector": "",
-            "sub_sector": "",
-            "occupation": "",
-            "institute": "",
-            "qualification": "",
-            "field_of_study": "",
-            "year_of_graduation": "",
-            "position_rank": "",
-            "company": "",
-            "location": "",
-            "work_role": "",
-            "start_date": "",
-            "end_date": "",
-            "description": ""
-        },
-        countriesList: CountriesList,
-        genderList: ["Male", "Female", "Binary"],
-        maritalList: ["Single", "Married", "Divorder"],
-        titleList:["Mr", "Mrs", "Miss"],
-        gradeList:["Graduate", "Associate", "Fellow"]
+      isSubmit: false,
+      isLoading: false,
+      gallery: [],
+      profile: {
+        'grade': '',
+        'title': '',
+        'marital_status': '',
+        'dob': '',
+        'gender': '',
+        'phone_number': '',
+        'address': '',
+        'city': '',
+        'state': '',
+        'country': '',
+        'postal_address': '',
+        'chapter': '',
+        'sector': '',
+        'sub_sector': '',
+        'occupation': '',
+        'institute': '',
+        'qualification': '',
+        'field_of_study': '',
+        'year_of_graduation': '',
+        'position_rank': '',
+        'company': '',
+        'location': '',
+        'work_role': '',
+        'start_date': '',
+        'end_date': '',
+        'description': '',
+      },
+      countriesList: CountriesList,
+      genderList: ['Male', 'Female', 'Binary'],
+      maritalList: ['Single', 'Married', 'Divorder'],
+      titleList: ['Mr', 'Mrs', 'Miss'],
+      gradeList: ['Graduate', 'Associate', 'Fellow'],
     }
   },
   methods: {
     updateProfile () {
-        this.isSubmit = true;
-        callApi('/profile/update', this.profile, 'post')
+      this.isSubmit = true
+      callApi('/profile/update', this.profile, 'post')
         .then(res => {
-            this.isSubmit = false
-            console.log(res);
+          this.isSubmit = false
+          console.log(res)
         })
         .catch(err => {
-            this.isSubmit = false
-            console.log(err);
+          this.isSubmit = false
+          console.log(err)
         })
-    }
+    },
+    savePhoto () {
+      this.isLoading = true
+      let photoFormData = new FormData()
+      photoFormData.append('passport', this.gallery[0])
+      callApi('/profile/update/passport', photoFormData, 'post')
+        .then(res => {
+          console.log(res)
+          this.isLoading = false
+        })
+        .then(err => {
+          console.error(err)
+          this.isLoading = false
+        })
+    },
   },
   created () {
-    callApi(`/profile`, {}, "get")
-        .then(res => {
-          this.profile = res.data;
-        })
-        .catch(err => {
-          console.log(err)
-        });
+    callApi(`/profile`, {}, 'get')
+      .then(res => {
+        this.profile = res.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
 }
 </script>

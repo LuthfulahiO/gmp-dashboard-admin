@@ -17,23 +17,23 @@
 </template>
 
 <script>
-import OverviewTab from './dashboard-tabs/OverviewTab'
-import BillingAddressTab from './dashboard-tabs/BillingAddressTab'
+import ListMentorRequestTab from './dashboard-tabs/ListMentorRequestTab'
+import RequestMentorTab from './dashboard-tabs/RequestMentorTab'
 import BankDetailsTab from './dashboard-tabs/BankDetailsTab'
 
 export default {
   name: 'DashboardTabs',
   components: {
-    OverviewTab,
-    BillingAddressTab,
+    ListMentorRequestTab,
+    RequestMentorTab,
     BankDetailsTab,
   },
   data () {
     return {
       tabsState: 1,
       tabs: [
-        'OverviewTab',
-        'BillingAddressTab',
+        'ListMentorRequestTab',
+        'RequestMentorTab',
         'BankDetailsTab',
       ],
     }
