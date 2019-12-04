@@ -21,11 +21,11 @@ export const navigationRoutes = {
       },
     },
     {
-      name: 'mentor',
-      displayName: 'Mentor',
+      name: 'payment',
+      displayName: 'Payments',
       meta: {
-        linkTo: 'mentor',
-        iconClass: 'vuestic-iconset-user',
+        linkTo: 'payment',
+        iconClass: 'vuestic-iconset-statistics',
       },
     },
     // {

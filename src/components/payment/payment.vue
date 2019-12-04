@@ -1,11 +1,11 @@
 <template>
-  <va-card title="Mentors">
+  <va-card title="Payments">
     <va-tabs grow v-model="tabsState">
       <va-tab>
-        Requests List
+        Payments List
       </va-tab>
       <va-tab>
-        Make New Request
+        Add New Payment
       </va-tab>
     </va-tabs>
     <va-separator/>
@@ -14,21 +14,21 @@
 </template>
 
 <script>
-import ListMentorRequestTab from '../dashboard/dashboard-tabs/ListMentorRequestTab'
-import RequestMentorTab from '../dashboard/dashboard-tabs/RequestMentorTab'
+import ListPayment from './ListPayment'
+import AddPayment from './AddPayment'
 
 export default {
   name: 'DashboardTabs',
   components: {
-    ListMentorRequestTab,
-    RequestMentorTab,
+    ListPayment,
+    AddPayment,
   },
   data () {
     return {
       tabsState: 0,
       tabs: [
-        'ListMentorRequestTab',
-        'RequestMentorTab',
+        'ListPayment',
+        'AddPayment',
       ],
     }
   },

@@ -3,7 +3,7 @@ import axios from "axios";
 export const isProd = process.env.NODE_ENV === "production";
 
 const request = axios.create({
-  baseURL:  "http://portal.gmp.dervac.com/api/v1"
+  baseURL:  "https://portal.gmp.dervac.com/api/v1"
 });
 
 export const callApi = (url, data = {}, methodName = "get") => {
@@ -28,10 +28,6 @@ export const callApi = (url, data = {}, methodName = "get") => {
           // Response from server w/ error
           return reject(err.response.data);
         }
-        return reject({
-          title: "❌ Network Error",
-          message: "Please check your internet connection and try again."
-        });
       });
   });
 };

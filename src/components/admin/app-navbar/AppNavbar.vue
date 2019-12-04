@@ -41,7 +41,7 @@
       <!--/>-->
       <!-- <language-dropdown class="va-navbar__item"/> -->
       <profile-dropdown class="va-navbar__item">
-        <span>{{currentUser.first_name}}</span>
+        <span>HELLO</span>
       </profile-dropdown>
     </div>
   </va-navbar>

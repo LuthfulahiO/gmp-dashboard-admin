@@ -87,13 +87,13 @@ export default {
         return
       }else {
         this.isSubmit = true
-        callApi(`/login`, {email: this.email, password: this.password }, "post")
+        callApi(`/admin/login`, {email: this.email, password: this.password }, "post")
         .then(res => {
           this.isSubmit = false
           LocalStore.saveToken(res.data.token)
           LocalStore.saveUser(res.data.user)
           this.successMessage = res.message
-          this.$router.push({ name: 'profile' })
+          this.$router.push({ name: 'dashboard' })
         })
         .catch(err => {
           this.isSubmit = false

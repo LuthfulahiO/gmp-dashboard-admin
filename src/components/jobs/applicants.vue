@@ -7,27 +7,27 @@
       :size="64"
       :color="'#4ae387'"
     />
-      <h1 v-if="memberList.length == 0 && !isFetching">No members</h1>
+      <h1 v-if="applicantList.length == 0 && !isFetching">No applicannts</h1>
       <table v-else class="va-table va-table--striped va-table--hoverable">
         <thead>
           <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Name</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>State</th>
+            <!-- <th>Phone</th> -->
+            <!-- <th>State</th> -->
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="member in memberList" :key="member.uuid">
-            <td>{{member.details.member_id}}</td>
-            <td>{{`${member.first_name} ${member.last_name}` }}</td>
-            <td>{{ member.email }}</td>
-            <td>{{ member.details.phone_number ? member.details.phone_number : "" }}</td>
-            <td>
-              {{member.details.state ? member.details.state : ""}}
-            </td>
+          <tr v-for="applicant in applicantList" :key="applicant.uuid">
+            <!-- <td>{{applicant.details.applicant_id}}</td> -->
+            <td>{{`${applicant.first_name} ${applicant.last_name}` }}</td>
+            <td>{{ applicant.email }}</td>
+            <!-- <td>{{ applicant.details.phone_number ? applicant.details.phone_number : "" }}</td> -->
+            <!-- <td>
+              {{applicant.details.state ? applicant.details.state : ""}}
+            </td> -->
           </tr>
         </tbody>
       </table>
@@ -39,20 +39,26 @@
 import { callApi } from '../../app/utils'
 import {CirclesToRhombusesSpinner} from 'epic-spinners'
 export default {
-  name: "Members table",
+  name: "ApplicantsTable",
   components: {
     CirclesToRhombusesSpinner
   },
   data () {
     return {
-      memberList: [],
+      applicantList: [],
       isFetching: true,
+      jobuuid: ""
     }
   },
   created () {
-    callApi('/admin/member/list', {}, 'get')
+    if (!this.$route.params.uuid) {
+      this.$router.push('/joblist')
+    } else {
+      this.jobuuid = this.$route.params.uuid
+    }
+    callApi(`/admin/job/application/${this.jobuuid}`, {}, 'get')
       .then(res => {
-        this.memberList = res.data
+        this.applicantList = res.data
         this.isFetching = false
       })
       .catch(err => {
